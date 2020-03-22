@@ -6,12 +6,18 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 
 @InjectViewState
-class AttachmentsPresenter(val item: ItemAttachments) : MvpPresenter<AttachmentsView>() {
+class AttachmentsPresenter() : MvpPresenter<AttachmentsView>() {
+    var item : ItemAttachments? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        viewState.setTitle(item.title)
-        viewState.setDescription(item.description)
+    }
+
+    fun updateFragment() {
+        item?.let {
+            viewState.setTitle(it.title)
+            viewState.setDescription(it.description)
+        }
     }
 }

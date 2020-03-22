@@ -1,5 +1,6 @@
 package com.egorovsoft.vkconnector.navigation
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.egorovsoft.vkconnector.mvp.model.attachments.ItemAttachments
 import com.egorovsoft.vkconnector.ui.fragment.attachments.AttachmentsFragment
@@ -11,6 +12,8 @@ class Screens {
         override fun getFragment(): Fragment = NewsFragment.newInstance()
     }
     class AttachmentsScreen(val item: ItemAttachments) : SupportAppScreen() {
-        override fun getFragment(): Fragment = AttachmentsFragment.newInstance(item)
+        override fun getFragment(): Fragment = AttachmentsFragment.newInstance().apply {
+            arguments = bundleOf(AttachmentsFragment.KEY to item)
+        }
     }
 }

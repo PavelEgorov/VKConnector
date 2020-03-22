@@ -14,17 +14,18 @@ import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class AttachmentsFragment(val item: ItemAttachments) : MvpAppCompatFragment(), AttachmentsView {
+class AttachmentsFragment() : MvpAppCompatFragment(), AttachmentsView {
 
     companion object {
-        fun newInstance(item: ItemAttachments) = AttachmentsFragment(item)
+        val KEY = AttachmentsFragment::class.java.name + "extra.ATTACHMENT"
+        fun newInstance() = AttachmentsFragment()
     }
 
     @InjectPresenter
     lateinit var presenter: AttachmentsPresenter
 
     @ProvidePresenter
-    fun providePresenter() = AttachmentsPresenter(item)
+    fun providePresenter() = AttachmentsPresenter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +35,11 @@ class AttachmentsFragment(val item: ItemAttachments) : MvpAppCompatFragment(), A
     }
 
     override fun init() {
-
+        val bundle = arguments
+        bundle?.let {
+            presenter.item = bundle.getParcelable(KEY)
+            presenter.updateFragment()
+        }
     }
 
     override fun setTitle(txt: String) {
