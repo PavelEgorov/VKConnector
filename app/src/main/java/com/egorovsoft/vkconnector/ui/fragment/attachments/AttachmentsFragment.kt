@@ -10,6 +10,7 @@ import com.egorovsoft.vkconnector.R
 import com.egorovsoft.vkconnector.mvp.model.attachments.ItemAttachments
 import com.egorovsoft.vkconnector.mvp.presenter.fragment.AttachmentsPresenter
 import com.egorovsoft.vkconnector.mvp.view.fragment.attachments.AttachmentsView
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_attachments.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -28,7 +29,7 @@ class AttachmentsFragment() : MvpAppCompatFragment(), AttachmentsView {
     lateinit var presenter: AttachmentsPresenter
 
     @ProvidePresenter
-    fun providePresenter() = AttachmentsPresenter().apply {
+    fun providePresenter() = AttachmentsPresenter(AndroidSchedulers.mainThread()).apply {
         val bundle = arguments
         bundle?.let {
             this.item = bundle.getParcelable(KEY)
