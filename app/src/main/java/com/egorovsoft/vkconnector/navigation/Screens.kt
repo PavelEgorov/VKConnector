@@ -12,8 +12,6 @@ class Screens {
         override fun getFragment(): Fragment = NewsFragment.newInstance()
     }
     class AttachmentsScreen(val item: ItemAttachments) : SupportAppScreen() {
-        override fun getFragment(): Fragment = AttachmentsFragment.newInstance().apply {
-            arguments = bundleOf(AttachmentsFragment.KEY to item)
-        }
+        override fun getFragment(): Fragment = AttachmentsFragment.newInstance(item)
     }
 }

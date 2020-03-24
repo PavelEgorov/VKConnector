@@ -12,6 +12,7 @@ class AttachmentsPresenter() : MvpPresenter<AttachmentsView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
+        updateFragment()
     }
 
     fun updateFragment() {
