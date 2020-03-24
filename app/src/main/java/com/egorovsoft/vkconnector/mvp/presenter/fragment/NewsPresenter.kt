@@ -6,15 +6,12 @@ import com.egorovsoft.vkconnector.mvp.view.fragment.news.IRvNewsPresenter
 import com.egorovsoft.vkconnector.mvp.view.fragment.news.IViewHolderNews
 import com.egorovsoft.vkconnector.mvp.view.fragment.news.NewsView
 import com.egorovsoft.vkconnector.navigation.Screens
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Scheduler
-import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class NewsPresenter(val newsList: ItemNewsModel, val router: Router, val mainThread : Scheduler) : MvpPresenter<NewsView>(){
+class NewsPresenter(val newsList: ItemNewsModel, val router: Router) : MvpPresenter<NewsView>(){
 
     class RvPresenter() : IRvNewsPresenter {
         val news = mutableListOf<ItemNews>()
@@ -42,7 +39,7 @@ class NewsPresenter(val newsList: ItemNewsModel, val router: Router, val mainThr
     }
 
     fun updateNews(){
-        newsList.getNews()
+       newsList.getNews()
             .subscribeOn(Schedulers.io())
             .observeOn(mainThread)
             .subscribe{
