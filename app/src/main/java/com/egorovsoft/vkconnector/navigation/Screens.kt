@@ -1,6 +1,5 @@
 package com.egorovsoft.vkconnector.navigation
 
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.egorovsoft.vkconnector.mvp.model.attachments.ItemAttachments
 import com.egorovsoft.vkconnector.ui.fragment.attachments.AttachmentsFragment

@@ -1,7 +1,6 @@
 package com.egorovsoft.vkconnector.mvp.model.news
 
 import com.egorovsoft.vkconnector.mvp.model.attachments.ItemAttachments
-import com.egorovsoft.vkconnector.rx.Presenter
 import io.reactivex.rxjava3.core.Observable
 
 class ItemNewsModel {
@@ -18,6 +17,7 @@ class ItemNewsModel {
     )
 
     /// newsfeed.get() api vk
+    /// Поменял кнопку.
     fun getNews() = Observable.fromCallable {
         return@fromCallable news
     }

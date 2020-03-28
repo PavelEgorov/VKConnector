@@ -41,7 +41,8 @@ class NewsPresenter(val newsList: ItemNewsModel, val router: Router, val mainThr
     }
 
     fun updateNews(){
-       newsList.getNews()
+        /// Меняем обновление
+        newsList.getNews()
             .subscribeOn(Schedulers.io())
             .observeOn(mainThread)
             .subscribe{
