@@ -41,6 +41,8 @@ class NewsFragment : MvpAppCompatFragment(), NewsView {
     }
 
     override fun updateList() {
-        adapter?.notifyDataSetChanged()
+        adapter?.let{
+            it.notifyDataSetChanged()
+        }
     }
 }
