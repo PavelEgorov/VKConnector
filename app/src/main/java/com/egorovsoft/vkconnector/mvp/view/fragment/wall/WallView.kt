@@ -1,11 +1,11 @@
-package com.egorovsoft.vkconnector.mvp.view
+package com.egorovsoft.vkconnector.mvp.view.fragment.wall
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface MainView:MvpView {
-    fun setUserName(txt: String)
-    fun loadPhoto(path: String)
+interface WallView : MvpView {
+    fun init()
+    fun updateList()
 }

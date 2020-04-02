@@ -1,10 +1,11 @@
 package com.egorovsoft.vkconnector.mvp.model.attachments
 
 import android.os.Parcelable
+import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ItemAttachments (
-    val title: String,
-    val description: String
+    @Expose val title: String,
+    @Expose val description: String
 ): Parcelable
