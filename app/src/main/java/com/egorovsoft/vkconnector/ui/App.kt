@@ -3,6 +3,7 @@ package com.egorovsoft.vkconnector.ui
 import android.app.Application
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
+import timber.log.Timber
 
 class App: Application() {
     companion object{
@@ -16,6 +17,7 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        Timber.plant(Timber.DebugTree())
     }
 
 
