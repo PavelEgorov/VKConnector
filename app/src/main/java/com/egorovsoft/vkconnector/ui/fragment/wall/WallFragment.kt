@@ -1,7 +1,6 @@
 package com.egorovsoft.vkconnector.ui.fragment.wall
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.egorovsoft.vkconnector.R
 import com.egorovsoft.vkconnector.mvp.model.ApiHolder
+import com.egorovsoft.vkconnector.mvp.model.user.UserModel
 import com.egorovsoft.vkconnector.mvp.model.wall.WallModel
-import com.egorovsoft.vkconnector.mvp.presenter.fragment.NewsPresenter
 import com.egorovsoft.vkconnector.mvp.presenter.fragment.WallPresenter
 import com.egorovsoft.vkconnector.mvp.view.fragment.wall.WallView
-import com.egorovsoft.vkconnector.ui.App
-import com.egorovsoft.vkconnector.ui.fragment.attachments.AttachmentsFragment
-import com.egorovsoft.vkconnector.ui.fragment.news.NewsFragment
-import com.egorovsoft.vkconnector.ui.fragment.news.NewsRvAdapter
+import com.egorovsoft.vkconnector.ui.MainApp
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_wall.*
 import moxy.MvpAppCompatFragment
@@ -39,14 +35,14 @@ class WallFragment : MvpAppCompatFragment(), WallView {
 
     @ProvidePresenter
     fun providePresenter() = WallPresenter(
-        App.instance.getRouter(),
+        MainApp.instance.getRouter(),
         AndroidSchedulers.mainThread(),
-        WallModel(ApiHolder.api)
+        WallModel(ApiHolder.api),
+        UserModel(ApiHolder.api)
     ).apply {
         val bundle = arguments
         bundle?.let {
-            this.token = bundle.getString(KEY_TOKEN)
-            this.userId = bundle.getInt(KEY_USER_ID)
+            WallPresenter@this.initData(bundle.getString(KEY_TOKEN), bundle.getInt(KEY_USER_ID))
         }
     }
 

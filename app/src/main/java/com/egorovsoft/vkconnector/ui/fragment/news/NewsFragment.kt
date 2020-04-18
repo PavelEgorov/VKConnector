@@ -11,7 +11,7 @@ import com.egorovsoft.vkconnector.R
 import com.egorovsoft.vkconnector.mvp.model.news.ItemNewsModel
 import com.egorovsoft.vkconnector.mvp.presenter.fragment.NewsPresenter
 import com.egorovsoft.vkconnector.mvp.view.fragment.news.NewsView
-import com.egorovsoft.vkconnector.ui.App
+import com.egorovsoft.vkconnector.ui.MainApp
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_news.*
 import moxy.MvpAppCompatFragment
@@ -32,7 +32,7 @@ class NewsFragment : MvpAppCompatFragment(), NewsView {
     ): View? = inflater.inflate(R.layout.fragment_news, container, false)
 
     @ProvidePresenter
-    fun providePresenter() = NewsPresenter(ItemNewsModel(), App.instance.getRouter(), AndroidSchedulers.mainThread())
+    fun providePresenter() = NewsPresenter(ItemNewsModel(), MainApp.instance.getRouter(), AndroidSchedulers.mainThread())
 
     override fun init() {
         rv_news.layoutManager = LinearLayoutManager(context)

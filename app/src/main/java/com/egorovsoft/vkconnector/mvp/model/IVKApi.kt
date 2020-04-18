@@ -1,8 +1,8 @@
 package com.egorovsoft.vkconnector.mvp.model
 
-import com.egorovsoft.vkconnector.mvp.model.token.ResponseToken
 import com.egorovsoft.vkconnector.mvp.model.user.User
 import com.egorovsoft.vkconnector.mvp.model.wall.Wall
+import com.egorovsoft.vkconnector.mvp.model.wall.WallItem
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -20,12 +20,12 @@ import retrofit2.http.Query
 interface IVKApi {
     @GET("/authorize")
     fun authorize(
-        @Query("client_id") clientId: Int = 7383836, // id приложения в VK
-        @Query("redirect_uri") redirectUri: String = "https://oauth.vk.com/blank.html",
+        @Query("client_id") clientId: Int = Const.programID, // id приложения в VK // TODO: Переделать как переменную
+        @Query("redirect_uri") redirectUri: String = Const.redirectUri,            // TODO: Переделать как переменную
         @Query("display") display: String = "mobile",
         @Query("scope") scope: String = "wall",
         @Query("response_type") responseType: String = "token",
-        @Query("v") v: String = "5.122"
+        @Query("v") v: String = Const.versionAPI
     ): Single<String>
 
     @GET("/method/users.get")
@@ -33,7 +33,7 @@ interface IVKApi {
         @Query("access_token") accessToken : String,
         @Query("user_ids") userIds: Int,
         @Query("fields") fields: String = "photo_50",
-        @Query("v") v: String = "5.122"
+        @Query("v") v: String = Const.versionAPI
     ):Single<Responce<ArrayList<User>>>
 
     @GET("/method/wall.get")
@@ -41,6 +41,14 @@ interface IVKApi {
         @Query("access_token") accessToken : String,
         @Query("owner_id") ownerId : Int, /// Должен быть отрицательным
         @Query("count") count : Int = 10, /// максимум 100
-        @Query("v") v: String = "5.122"
+        @Query("v") v: String = Const.versionAPI
     ):Single<Responce<Wall>>
+
+    @GET("/method/wall.getById")
+    fun getById(
+        @Query("access_token") accessToken : String,
+        @Query("posts") posts : String,
+        @Query("copy_history_depth") copyHistoryDepth : Int = 1,
+        @Query("v") v: String = Const.versionAPI
+    ):Single<ArrayList<WallItem>>
 }

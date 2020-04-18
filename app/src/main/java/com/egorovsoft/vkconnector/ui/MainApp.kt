@@ -5,9 +5,9 @@ import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
 
-class App: Application() {
+class MainApp: Application() {
     companion object{
-        lateinit var instance: App
+        lateinit var instance: MainApp
     }
 
     val cicerone: Cicerone<Router> by lazy {
