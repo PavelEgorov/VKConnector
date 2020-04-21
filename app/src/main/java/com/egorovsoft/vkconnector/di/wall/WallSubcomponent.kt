@@ -18,4 +18,6 @@ interface WallSubcomponent {
     fun inject(rvPresenter: WallPresenter.RvPresenter)
 
     fun inject(wallRvAdapter: WallRvAdapter)
+    fun inject(viewHolder: WallRvAdapter.ViewHolder)
+
 }

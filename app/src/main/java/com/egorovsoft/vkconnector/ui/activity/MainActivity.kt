@@ -3,7 +3,9 @@ package com.egorovsoft.vkconnector.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import com.egorovsoft.vkconnector.R
+import com.egorovsoft.vkconnector.mvp.model.image.IImageLoader
 import com.egorovsoft.vkconnector.mvp.presenter.MainPresenter
 import com.egorovsoft.vkconnector.mvp.view.MainView
 import com.egorovsoft.vkconnector.ui.MainApp
@@ -25,8 +27,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
     }
 
-    @Inject
-    lateinit var navigatorHolder: NavigatorHolder
+    @Inject lateinit var navigatorHolder: NavigatorHolder
+    @Inject lateinit var imageLoader: IImageLoader<ImageView>
 
     @InjectPresenter
     lateinit var presenter: MainPresenter
@@ -39,7 +41,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     ).apply { mainComponent.inject(this) }
 
     private val navigator = SupportAppNavigator(this, R.id.conteiner)
-    private val imageLoader = GlideImageLoader()
     private val navigationListener = BottomNavigationView.OnNavigationItemSelectedListener {
         when(it.itemId){
             R.id.menu_wall -> {

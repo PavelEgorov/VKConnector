@@ -19,6 +19,8 @@ class MainApp: Application() {
         private set
 
     private var tMainComponent: MainSubcomponent? = null
+    private var tWallComponent: WallSubcomponent? = null
+    private var tFriendsComponent: FriendsSubcomponent? = null
 
     val mainComponent: MainSubcomponent
         get() = appComponent.mainSubcomponent().also {
@@ -26,11 +28,17 @@ class MainApp: Application() {
         }
 
     val wallComponent: WallSubcomponent
-        get() = tMainComponent!!.wallSubcomponent()
+        get() = tMainComponent!!.wallSubcomponent().also {
+            tWallComponent = it
+        }
+    val friendsComponent: FriendsSubcomponent
+        get() = tMainComponent!!.friendsSubcomponent().also {
+            tFriendsComponent = it
+        }
+
     val newsComponent: NewsSubcomponent
         get() = tMainComponent!!.newsSubcomponent()
-    val friendsComponent: FriendsSubcomponent
-        get() = tMainComponent!!.friendsSubcomponent()
+
 
     override fun onCreate() {
         super.onCreate()

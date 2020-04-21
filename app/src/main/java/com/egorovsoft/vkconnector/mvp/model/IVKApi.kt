@@ -1,5 +1,7 @@
 package com.egorovsoft.vkconnector.mvp.model
 
+import com.egorovsoft.vkconnector.mvp.model.conversation.Conversation
+import com.egorovsoft.vkconnector.mvp.model.friends.ResponceFriends
 import com.egorovsoft.vkconnector.mvp.model.user.User
 import com.egorovsoft.vkconnector.mvp.model.wall.Wall
 import com.egorovsoft.vkconnector.mvp.model.wall.WallItem
@@ -37,8 +39,26 @@ interface IVKApi {
     @GET("/method/wall.getById")
     fun getById(
         @Query("access_token") accessToken : String,
+        @Query("user_id") userId : Int, /// идентификатор пользователя
         @Query("posts") posts : String,
         @Query("copy_history_depth") copyHistoryDepth : Int = 1,
         @Query("v") v: String = Const.versionAPI
     ):Single<ArrayList<WallItem>>
+
+    @GET("/method/friends.get")
+    fun friendsGet(
+        @Query("access_token") accessToken : String,
+        @Query("user_id") userId : Int, /// идентификатор пользователя
+        @Query("order") order : String = "name", /// порядок, в котором нужно вернуть список друзей
+        @Query("fields") fields : String = "photo_50", /// При использовании параметра fields возвращает список объектов, иначе только id
+        @Query("v") v: String = Const.versionAPI
+    ):Single<Responce<ResponceFriends>>
+
+    @GET("messages.searchConversations")
+    fun getChat(
+        @Query("access_token") accessToken : String,
+        @Query("v") v: String = Const.versionAPI
+    ):Single<Responce<Conversation>>
+
+    
 }

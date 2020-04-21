@@ -1,6 +1,8 @@
 package com.egorovsoft.vkconnector.di.main
 
+import android.media.Image
 import com.egorovsoft.vkconnector.di.friends.FriendsSubcomponent
+import com.egorovsoft.vkconnector.di.main.modules.ImageModule
 import com.egorovsoft.vkconnector.di.main.modules.UserModule
 import com.egorovsoft.vkconnector.di.news.NewsSubcomponent
 import com.egorovsoft.vkconnector.di.wall.WallSubcomponent
@@ -11,7 +13,8 @@ import dagger.Subcomponent
 @MainScope
 @Subcomponent(
     modules = [
-        UserModule::class
+        UserModule::class,
+        ImageModule::class
     ]
 )
 interface MainSubcomponent {

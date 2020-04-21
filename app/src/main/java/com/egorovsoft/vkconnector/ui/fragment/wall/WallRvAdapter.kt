@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import com.egorovsoft.vkconnector.R
+import com.egorovsoft.vkconnector.mvp.model.image.IImageLoader
 import com.egorovsoft.vkconnector.mvp.view.fragment.wall.IRvWallPresenter
 import com.egorovsoft.vkconnector.mvp.view.fragment.wall.IViewHolderWall
+import com.egorovsoft.vkconnector.ui.MainApp
 import com.egorovsoft.vkconnector.ui.image.GlideImageLoader
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.rv_wall.*
@@ -18,11 +20,15 @@ import kotlinx.android.synthetic.main.rv_wall.photo_wall
 import kotlinx.android.synthetic.main.rv_wall.txt_link_wall
 import kotlinx.android.synthetic.main.rv_wall.txt_wall
 import kotlinx.android.synthetic.main.rv_wall.view.*
+import javax.inject.Inject
 
 class WallRvAdapter(val presenter : IRvWallPresenter): RecyclerView.Adapter<WallRvAdapter.ViewHolder>() {
+    val wallSubcomponent = MainApp.instance.wallComponent
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_wall, parent, false))
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_wall, parent, false)).apply {
+            wallSubcomponent.inject(this)
+        }
 
     override fun getItemCount(): Int = presenter.getItemCount()
 
@@ -36,8 +42,7 @@ class WallRvAdapter(val presenter : IRvWallPresenter): RecyclerView.Adapter<Wall
 
     class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView),
         LayoutContainer, IViewHolderWall {
-        private val imageLoader = GlideImageLoader()
-
+        @Inject lateinit var imageLoader: IImageLoader<ImageView>
         override var pos = -1
 
         override fun setUserText(txt: String?) = with(containerView){
