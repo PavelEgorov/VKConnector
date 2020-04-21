@@ -4,6 +4,7 @@ import android.app.Application
 import com.egorovsoft.vkconnector.di.app.AppComponent
 import com.egorovsoft.vkconnector.di.app.DaggerAppComponent
 import com.egorovsoft.vkconnector.di.app.modules.AppModule
+import com.egorovsoft.vkconnector.di.conversation.ConversationSubcomponent
 import com.egorovsoft.vkconnector.di.friends.FriendsSubcomponent
 import com.egorovsoft.vkconnector.di.main.MainSubcomponent
 import com.egorovsoft.vkconnector.di.news.NewsSubcomponent
@@ -21,6 +22,7 @@ class MainApp: Application() {
     private var tMainComponent: MainSubcomponent? = null
     private var tWallComponent: WallSubcomponent? = null
     private var tFriendsComponent: FriendsSubcomponent? = null
+    private var tConversationComponent: ConversationSubcomponent? = null
 
     val mainComponent: MainSubcomponent
         get() = appComponent.mainSubcomponent().also {
@@ -34,6 +36,10 @@ class MainApp: Application() {
     val friendsComponent: FriendsSubcomponent
         get() = tMainComponent!!.friendsSubcomponent().also {
             tFriendsComponent = it
+        }
+    val conversationComponent: ConversationSubcomponent
+        get() = tMainComponent!!.conversationSubcomponent().also {
+            tConversationComponent = it
         }
 
     val newsComponent: NewsSubcomponent

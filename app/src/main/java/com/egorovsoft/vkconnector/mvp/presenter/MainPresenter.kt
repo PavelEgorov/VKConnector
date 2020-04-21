@@ -59,8 +59,6 @@ class MainPresenter(
     }
 
     fun menuMessageSelected(){
-        /// TODO: Сделать загрузку личных сообщений
-        /// TODO: Сделать фрагмент личных сообщений
-        /// TODO: Сделать кэш личных сообщений
+        router.navigateTo(Screens.ConversationScreen())
     }
 }

@@ -1,11 +1,9 @@
 package com.egorovsoft.vkconnector.navigation
 
-import android.content.Context
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.egorovsoft.vkconnector.mvp.model.attachments.ItemAttachments
-import com.egorovsoft.vkconnector.ui.activity.MainActivity
 import com.egorovsoft.vkconnector.ui.fragment.attachments.AttachmentsFragment
+import com.egorovsoft.vkconnector.ui.fragment.conversation.ConversationFragment
 import com.egorovsoft.vkconnector.ui.fragment.friends.FriendsFragment
 import com.egorovsoft.vkconnector.ui.fragment.news.NewsFragment
 import com.egorovsoft.vkconnector.ui.fragment.wall.WallFragment
@@ -18,6 +16,10 @@ class Screens {
 
     class FriendsScreen() : SupportAppScreen() {
         override fun getFragment(): Fragment = FriendsFragment.newInstance()
+    }
+
+    class ConversationScreen() : SupportAppScreen() {
+        override fun getFragment(): Fragment = ConversationFragment.newInstance()
     }
 
     class AttachmentsScreen(val item: ItemAttachments) : SupportAppScreen() {
