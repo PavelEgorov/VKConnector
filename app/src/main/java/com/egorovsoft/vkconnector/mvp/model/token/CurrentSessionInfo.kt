@@ -5,8 +5,9 @@ import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class ResponseToken (
-    @Expose val accessToken: String,
-    @Expose val expiresIn: String,
-    @Expose val userId: Int
-):Parcelable
+data class CurrentSessionInfo (
+    @Expose val appId: Int,
+    @Expose val userId: Int,
+    @Expose val currentToken: String,
+    @Expose val date: Int
+): Parcelable

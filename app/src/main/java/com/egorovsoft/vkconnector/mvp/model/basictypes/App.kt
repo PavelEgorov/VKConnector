@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
+///Это устаревший тип вложений. Он может быть возвращен лишь для записей, созданных раньше 2013 года.
 @Parcelize
 data class App (
     @Expose val id:Int,

@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.egorovsoft.vkconnector.R
-import com.egorovsoft.vkconnector.mvp.model.ApiHolder
 import com.egorovsoft.vkconnector.mvp.model.user.UserModel
 import com.egorovsoft.vkconnector.mvp.model.wall.WallModel
 import com.egorovsoft.vkconnector.mvp.presenter.fragment.WallPresenter
@@ -22,28 +21,19 @@ import moxy.presenter.ProvidePresenter
 
 class WallFragment : MvpAppCompatFragment(), WallView {
     companion object{
-        private val KEY_TOKEN = WallFragment::class.java.name + "extra.TOKEN"
-        private val KEY_USER_ID = WallFragment::class.java.name + "extra.USERID"
-
-        fun newInstance(token: String, userId: Int) = WallFragment().apply {
-            arguments = bundleOf(KEY_TOKEN to token, KEY_USER_ID to userId)
-        }
+        fun newInstance() = WallFragment()
     }
 
     @InjectPresenter
     lateinit var presenter: WallPresenter
 
+    private val wallComponent = MainApp.instance.wallComponent
+
     @ProvidePresenter
     fun providePresenter() = WallPresenter(
-        MainApp.instance.getRouter(),
-        AndroidSchedulers.mainThread(),
-        WallModel(ApiHolder.api),
-        UserModel(ApiHolder.api)
+        AndroidSchedulers.mainThread()
     ).apply {
-        val bundle = arguments
-        bundle?.let {
-            WallPresenter@this.initData(bundle.getString(KEY_TOKEN), bundle.getInt(KEY_USER_ID))
-        }
+        wallComponent.inject(this)
     }
 
     lateinit var adapter: WallRvAdapter
@@ -56,9 +46,18 @@ class WallFragment : MvpAppCompatFragment(), WallView {
         return inflater.inflate(R.layout.fragment_wall, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        wallComponent.inject(this)
+    }
     override fun init() {
         rv_wall.layoutManager = LinearLayoutManager(context)
-        adapter = WallRvAdapter(presenter.rvPresenter)
+        adapter = WallRvAdapter(presenter.rvPresenter.apply {
+            wallComponent.inject(this)
+        }).apply {
+            wallComponent.inject(this)
+        }
         rv_wall.adapter = adapter;
     }
 

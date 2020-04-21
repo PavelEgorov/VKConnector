@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
+/// Устаревший тип, по этому я не буду его обрабатывать (исключительно для сокращения работы, т.к. боюсь не успеть.)
 @Parcelize
 data class PostedPhoto (
     @Expose val id: Int,

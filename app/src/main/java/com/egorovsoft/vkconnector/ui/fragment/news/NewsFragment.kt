@@ -26,17 +26,28 @@ class NewsFragment : MvpAppCompatFragment(), NewsView {
     @InjectPresenter
     lateinit var presenter: NewsPresenter
 
+    private val newsComponent = MainApp.instance.newsComponent
+
     lateinit var adapter: NewsRvAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_news, container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        newsComponent.inject(this)
+    }
+
     @ProvidePresenter
-    fun providePresenter() = NewsPresenter(ItemNewsModel(), MainApp.instance.getRouter(), AndroidSchedulers.mainThread())
+    fun providePresenter() = NewsPresenter(ItemNewsModel(), AndroidSchedulers.mainThread()).apply {
+        newsComponent.inject(this)
+    }
 
     override fun init() {
         rv_news.layoutManager = LinearLayoutManager(context)
-        adapter = NewsRvAdapter(presenter.rvPresenter)
+        adapter = NewsRvAdapter(presenter.rvPresenter).apply {
+            newsComponent.inject(this)
+        }
         rv_news.adapter = adapter;
     }
 

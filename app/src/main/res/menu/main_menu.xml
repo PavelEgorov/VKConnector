@@ -5,8 +5,8 @@
         android:id="@+id/menu_wall"
         android:title="@string/wall"/>
     <item
-        android:id="@+id/menu_news"
-        android:title="@string/news" />
+        android:id="@+id/menu_friends"
+        android:title="@string/friends" />
     <item
         android:id="@+id/menu_message"
         android:title="@string/message" />

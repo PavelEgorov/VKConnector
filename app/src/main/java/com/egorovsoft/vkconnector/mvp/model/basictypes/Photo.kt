@@ -10,5 +10,5 @@ data class Photo(
     @Expose val albumId: Int,
     @Expose val ownerId: Int,
     @Expose val text: String,
-    @Expose val sizes: MutableList<Sizes>
+    @Expose var sizes: List<Sizes>?
 ): Parcelable

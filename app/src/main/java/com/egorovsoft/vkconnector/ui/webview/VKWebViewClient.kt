@@ -4,9 +4,9 @@ import android.graphics.Bitmap
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.egorovsoft.vkconnector.mvp.presenter.MainPresenter
+import com.egorovsoft.vkconnector.mvp.presenter.SplashPresenter
 
-class VKWebViewClient(val presenter: MainPresenter): WebViewClient() {
+class VKWebViewClient(val presenter: SplashPresenter): WebViewClient() {
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
         request?.let {
             presenter.loadUrl(it.url.toString())

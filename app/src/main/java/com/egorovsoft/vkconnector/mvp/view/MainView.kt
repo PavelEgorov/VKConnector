@@ -6,11 +6,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView:MvpView {
-    fun showAuthorization(page: String)
-    fun hideAuthorization()
-
-    fun loadUrl(url: String)
-
     fun setUserName(txt: String)
     fun loadPhoto(path: String)
 }

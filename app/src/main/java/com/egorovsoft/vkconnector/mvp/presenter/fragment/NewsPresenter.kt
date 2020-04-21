@@ -11,9 +11,12 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 @InjectViewState
-class NewsPresenter(val newsList: ItemNewsModel, val router: Router, val mainThread: Scheduler) : MvpPresenter<NewsView>(){
+class NewsPresenter(val newsList: ItemNewsModel, val mainThread: Scheduler) : MvpPresenter<NewsView>(){
+
+    @Inject lateinit var router: Router
 
     class RvPresenter() : IRvNewsPresenter {
         val news = mutableListOf<ItemNews>()

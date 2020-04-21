@@ -18,23 +18,13 @@ import retrofit2.http.Query
 //https://api.vk.com/method/
 //https://oauth.vk.com/authorize?client_id=7383836&redirect_uri=https://oauth.vk.com/blank.html&display=mobile&scope=wall&response_type=token&v=5.122
 interface IVKApi {
-    @GET("/authorize")
-    fun authorize(
-        @Query("client_id") clientId: Int = Const.programID, // id приложения в VK // TODO: Переделать как переменную
-        @Query("redirect_uri") redirectUri: String = Const.redirectUri,            // TODO: Переделать как переменную
-        @Query("display") display: String = "mobile",
-        @Query("scope") scope: String = "wall",
-        @Query("response_type") responseType: String = "token",
-        @Query("v") v: String = Const.versionAPI
-    ): Single<String>
-
     @GET("/method/users.get")
     fun userGet(
         @Query("access_token") accessToken : String,
         @Query("user_ids") userIds: Int,
         @Query("fields") fields: String = "photo_50",
         @Query("v") v: String = Const.versionAPI
-    ):Single<Responce<ArrayList<User>>>
+    ):Single<Responce<ArrayList<User>?>>
 
     @GET("/method/wall.get")
     fun wallGet(

@@ -14,6 +14,10 @@ import com.egorovsoft.vkconnector.mvp.view.fragment.wall.IViewHolderWall
 import com.egorovsoft.vkconnector.ui.image.GlideImageLoader
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.rv_wall.*
+import kotlinx.android.synthetic.main.rv_wall.photo_wall
+import kotlinx.android.synthetic.main.rv_wall.txt_link_wall
+import kotlinx.android.synthetic.main.rv_wall.txt_wall
+import kotlinx.android.synthetic.main.rv_wall.view.*
 
 class WallRvAdapter(val presenter : IRvWallPresenter): RecyclerView.Adapter<WallRvAdapter.ViewHolder>() {
 
@@ -36,27 +40,48 @@ class WallRvAdapter(val presenter : IRvWallPresenter): RecyclerView.Adapter<Wall
 
         override var pos = -1
 
-        override fun setText(txt: String) = with(containerView){
-            txt_wall.visibility = View.VISIBLE
-            txt_wall.text = txt
+        override fun setUserText(txt: String?) = with(containerView){
+            txt?.let {
+                txt_wall.visibility = View.VISIBLE
+                txt_wall.text = it
+            }?: let {
+                txt_wall.visibility = View.GONE
+            }
         }
 
-        override fun setIcon(path: String) {
-            imageLoader.loadInto(path, img_wall)
+        override fun setIcon(path: String?) = with(containerView){
+            path?.let {
+                img_wall.visibility = View.VISIBLE
+                imageLoader.loadInto(it, img_wall)
+            }?: let{
+                img_wall.visibility = View.GONE
+            }
         }
 
-        override fun setTitle(txt: String) {
-            title_wall.text = txt
+        override fun setTitle(txt: String?) = with(containerView){
+            txt?.let {
+                title_wall.text = it
+            }?: let {
+                title_wall.text = ""
+            }
         }
 
-        override fun addImage(path: String) = with(containerView){
-            photo_wall.visibility = View.VISIBLE
-            imageLoader.loadInto(path, photo_wall)
+        override fun setPhoto(path: String?) = with(containerView){
+            path?.let {
+                photo_wall.visibility = View.VISIBLE
+                imageLoader.loadInto(it, photo_wall)
+            }?: let{
+                photo_wall.visibility = View.GONE
+            }
         }
 
-        override fun addText(txt: String) = with(containerView){
-            txt_link_wall.visibility = View.VISIBLE
-            txt_link_wall.text = txt
+        override fun setText(txt: String?) = with(containerView){
+            txt?.let {
+                txt_link_wall.visibility = View.VISIBLE
+                txt_link_wall.text = it
+            }?: let {
+                txt_link_wall.visibility = View.GONE
+            }
         }
     }
 }
